@@ -8,9 +8,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f7fafc;
+  background: #ffffff;
   padding: 7rem 1.5rem 4rem;
   overflow: hidden;
+}
+
+.heroImage {
+  position: absolute;
+  top: 5.5rem;
+  right: 0;
+  bottom: 3rem;
+  width: 46%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 18px 45px rgba(25, 54, 82, 0.16);
 }
 
 .heroContent {
@@ -21,7 +33,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 390px;
   gap: 2rem;
-  align-items: end;
+  align-items: center;
+  padding: 2rem 0;
 }
 
 .heroCopy { max-width: 680px; }
@@ -89,7 +102,7 @@
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255,255,255,0.95);
+  background: #ffffff;
   border-left: 4px solid #d8b75a;
   box-shadow: 0 18px 45px rgba(0,0,0,0.24);
   color: #102a43;
@@ -395,7 +408,9 @@
 
 @media (max-width: 992px) {
   .hero { min-height: 820px; }
+  .heroImage { top: auto; right: 0; bottom: 0; width: 100%; height: 260px; border-radius: 0; opacity: 0.92; }
   .heroContent { grid-template-columns: 1fr; align-items: start; }
+  .heroCopy { padding-bottom: 1rem; }
   .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
   .heroTitle { font-size: 3.5rem; }
   .categoriesGrid { grid-template-columns: repeat(2, 1fr); }
