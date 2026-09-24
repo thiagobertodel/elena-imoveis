@@ -4,35 +4,58 @@
 
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: 760px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #edf5ff 0%, #dfeeff 42%, #cfe2ff 100%);
-  padding: 6rem 1.5rem 4rem;
-  border-bottom: 1px solid rgba(23, 105, 194, 0.12);
+  background: #102a43;
+  padding: 7rem 1.5rem 4rem;
+  overflow: hidden;
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  transition: opacity 0.5s ease, transform 8s ease;
+  transform: scale(1.04);
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(12, 45, 84, 0.08) 100%);
+  background: linear-gradient(90deg, rgba(7, 21, 37, 0.9) 0%, rgba(7, 21, 37, 0.62) 45%, rgba(7, 21, 37, 0.2) 100%), linear-gradient(0deg, rgba(7, 21, 37, 0.76), transparent 45%);
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
+  max-width: 1240px;
   width: 100%;
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 2rem;
+  align-items: end;
+}
+
+.heroCopy { max-width: 680px; }
+
+.heroEyebrow, .caixaLabel {
+  color: #d8b75a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
 
 .heroTitle {
-  font-size: 3.5rem;
+  font-size: clamp(3rem, 6vw, 5.6rem);
   font-weight: 800;
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin-bottom: 1.25rem;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 1.25rem 0;
+  max-width: 650px;
 }
 
 .goldText {
@@ -40,16 +63,73 @@
 }
 
 .heroSubtitle {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.82);
   max-width: 700px;
-  margin: 0 auto 3rem;
+  margin: 0 0 1.75rem;
   line-height: 1.6;
 }
 
-.searchWrapper {
-  margin-top: 1.5rem;
+.heroActions { display: flex; align-items: center; gap: 1.25rem; }
+
+.heroPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.25rem;
+  background: #d8b75a;
+  color: #102a43;
+  font-weight: 800;
+  border-radius: 4px;
 }
+
+.heroCounter { color: rgba(255,255,255,0.72); font-size: 0.85rem; letter-spacing: 1px; }
+
+.caixaHighlight {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.95);
+  border-left: 4px solid #d8b75a;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.24);
+  color: #102a43;
+}
+
+.caixaIcon { color: #1769c2; font-size: 1.5rem; }
+.caixaHighlight h2 { font-size: 1.35rem; line-height: 1.1; margin: 0.35rem 0 0.6rem; }
+.caixaHighlight p { color: #5b7087; font-size: 0.9rem; line-height: 1.55; margin: 0; }
+
+.searchWrapper {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.slideControls {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -0.5rem;
+}
+
+.slideControls button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(7,21,37,0.35);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.slideDots { display: flex; gap: 0.45rem; }
+.slideDots button { width: 24px; height: 4px; border: 0; border-radius: 0; background: rgba(255,255,255,0.4); }
+.slideDots button.activeDot { width: 48px; background: #d8b75a; }
 
 .section {
   max-width: 1280px;
@@ -286,13 +366,21 @@
 }
 
 @media (max-width: 992px) {
-  .heroTitle { font-size: 2.5rem; }
+  .hero { min-height: 820px; }
+  .heroContent { grid-template-columns: 1fr; align-items: start; }
+  .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
+  .heroTitle { font-size: 3.5rem; }
   .categoriesGrid { grid-template-columns: repeat(2, 1fr); }
   .featuresGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 576px) {
-  .heroTitle { font-size: 2rem; }
+  .hero { min-height: 920px; padding-top: 6rem; }
+  .heroTitle { font-size: 3rem; }
+  .heroSubtitle { font-size: 1rem; }
+  .heroActions { flex-wrap: wrap; }
+  .caixaHighlight { padding: 1.15rem; }
+  .caixaHighlight h2 { font-size: 1.15rem; }
   .categoriesGrid { grid-template-columns: 1fr; }
   .featuresGrid { grid-template-columns: 1fr; }
   .grid { grid-template-columns: 1fr; }

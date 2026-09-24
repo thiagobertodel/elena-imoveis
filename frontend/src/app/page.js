@@ -5,12 +5,36 @@ import Link from 'next/link';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
 import api from '../services/api';
-import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight } from 'react-icons/fa';
+import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight, FaChevronLeft, FaChevronRight, FaUniversity } from 'react-icons/fa';
 import styles from './page.module.css';
+
+const heroSlides = [
+  {
+    image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=85',
+    eyebrow: 'ELENA IMÓVEIS · PORTO ALEGRE',
+    title: 'Escolhas que atravessam gerações',
+    text: 'Uma curadoria imobiliária próxima, segura e feita para o seu próximo capítulo.',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
+    eyebrow: 'COMPRA · VENDA · FINANCIAMENTO',
+    title: 'Seu imóvel com mais clareza',
+    text: 'Do primeiro atendimento à assinatura, cuidamos de cada etapa com experiência local.',
+  },
+];
 
 export default function Home() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
+  const [activeSlide, setActiveSlide] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 7000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     async function loadProperties() {
@@ -30,17 +54,38 @@ export default function Home() {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
+        <div className={styles.heroImage} style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }} />
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>
-            Descubra o Imóvel dos Seus <span className={styles.goldText}>Sonhos</span>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            Encontre imóveis para comprar ou alugar em Porto Alegre e região.
-          </p>
-          
+          <div className={styles.heroCopy}>
+            <span className={styles.heroEyebrow}>{heroSlides[activeSlide].eyebrow}</span>
+            <h1 className={styles.heroTitle}>{heroSlides[activeSlide].title}</h1>
+            <p className={styles.heroSubtitle}>{heroSlides[activeSlide].text}</p>
+            <div className={styles.heroActions}>
+              <Link href="/imoveis" className={styles.heroPrimary}>Explorar imóveis <FaArrowRight /></Link>
+              <span className={styles.heroCounter}>{String(activeSlide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          <div className={styles.caixaHighlight}>
+            <div className={styles.caixaIcon}><FaUniversity /></div>
+            <div>
+              <span className={styles.caixaLabel}>CORRESPONDENTE CAIXA</span>
+              <h2>Financiamento sem complicação</h2>
+              <p>Agilizamos os trâmites do seu financiamento, além de apoiar em compra, venda e regularização de imóveis.</p>
+            </div>
+          </div>
+
           <div className={styles.searchWrapper}>
             <SearchBar />
+          </div>
+
+          <div className={styles.slideControls}>
+            <button type="button" onClick={() => setActiveSlide((activeSlide - 1 + heroSlides.length) % heroSlides.length)} aria-label="Slide anterior"><FaChevronLeft /></button>
+            <div className={styles.slideDots}>
+              {heroSlides.map((slide, index) => <button key={slide.title} type="button" className={index === activeSlide ? styles.activeDot : ''} onClick={() => setActiveSlide(index)} aria-label={`Ir para slide ${index + 1}`} />)}
+            </div>
+            <button type="button" onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Próximo slide"><FaChevronRight /></button>
           </div>
         </div>
       </section>
