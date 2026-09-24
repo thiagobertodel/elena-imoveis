@@ -101,7 +101,8 @@ export default function ImovelDetalhes({ params }) {
     maximumFractionDigits: 0,
   }).format(property.iptu) : null;
 
-  const whatsappPhone = property.anunciante_telefone ? property.anunciante_telefone.replace(/\D/g, '') : '';
+  const contactPhone = '51 99961-2190';
+  const whatsappPhone = contactPhone.replace(/\D/g, '');
   const whatsappUrl = `https://wa.me/55${whatsappPhone}?text=${encodeURIComponent(`Olá, tenho interesse no imóvel "${property.titulo}" (Cód: ${property.id}).`)}`;
 
   return (
@@ -264,11 +265,9 @@ export default function ImovelDetalhes({ params }) {
               </a>
             )}
 
-            {property.anunciante_telefone && (
-              <a href={`tel:${property.anunciante_telefone}`} className={styles.phoneBtn}>
-                <FaPhoneAlt /> {property.anunciante_telefone}
-              </a>
-            )}
+            <a href={`tel:${whatsappPhone}`} className={styles.phoneBtn}>
+              <FaPhoneAlt /> {contactPhone}
+            </a>
 
             <hr className={styles.divider} />
 
