@@ -15,14 +15,14 @@
 
 .heroImage {
   position: absolute;
-  top: 5.5rem;
+  top: 235px;
   right: 0;
-  bottom: 3rem;
-  width: 46%;
+  bottom: 0;
+  width: 100%;
   background-position: center;
   background-size: cover;
-  border-radius: 8px 0 0 8px;
-  box-shadow: 0 18px 45px rgba(25, 54, 82, 0.16);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .heroContent {
@@ -106,6 +106,7 @@
   border-left: 4px solid #d8b75a;
   box-shadow: 0 18px 45px rgba(0,0,0,0.24);
   color: #102a43;
+  z-index: 2;
 }
 
 .caixaLogoSlot {
@@ -146,6 +147,7 @@
 .searchWrapper {
   grid-column: 1 / -1;
   margin-top: 1rem;
+  z-index: 2;
 }
 
 .slideControls {
@@ -154,6 +156,7 @@
   align-items: center;
   gap: 1rem;
   margin-top: -0.5rem;
+  z-index: 2;
 }
 
 .slideControls button {
@@ -408,7 +411,7 @@
 
 @media (max-width: 992px) {
   .hero { min-height: 820px; }
-  .heroImage { top: auto; right: 0; bottom: 0; width: 100%; height: 260px; border-radius: 0; opacity: 0.92; }
+  .heroImage { top: 330px; right: 0; bottom: 0; width: 100%; opacity: 0.92; }
   .heroContent { grid-template-columns: 1fr; align-items: start; }
   .heroCopy { padding-bottom: 1rem; }
   .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
