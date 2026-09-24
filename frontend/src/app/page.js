@@ -10,13 +10,11 @@ import styles from './page.module.css';
 
 const heroSlides = [
   {
-    image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=85',
     eyebrow: 'ELENA IMÓVEIS · PORTO ALEGRE',
     title: 'Seu próximo imóvel começa aqui',
     text: 'Encontre oportunidades em Porto Alegre com atendimento próximo e orientação em cada etapa.',
   },
   {
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
     eyebrow: 'COMPRA · VENDA · FINANCIAMENTO',
     title: 'Negócios imobiliários com segurança',
     text: 'Do financiamento à regularização, conte com uma equipe experiente para seguir em frente.',
@@ -54,8 +52,6 @@ export default function Home() {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroImage} style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }} />
-        <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <div className={styles.heroCopy}>
             <span className={styles.heroEyebrow}>{heroSlides[activeSlide].eyebrow}</span>
@@ -69,9 +65,7 @@ export default function Home() {
 
           <div className={styles.caixaHighlight}>
             <div>
-              <div className={styles.caixaBrand} aria-label="CAIXA">
-                <span>CAI</span><b>X</b><span>A</span>
-              </div>
+              <div className={styles.caixaLogoSlot} aria-label="Espaço reservado para logo da CAIXA">LOGO CAIXA</div>
               <span className={styles.caixaLabel}>CORRESPONDENTE CAIXA</span>
               <h2>Financiamento sem complicação</h2>
               <p>Agilizamos os trâmites do seu financiamento, além de apoiar em compra, venda e regularização de imóveis.</p>
