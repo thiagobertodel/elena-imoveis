@@ -42,7 +42,9 @@ export default function Home() {
 
           <div className={styles.caixaHighlight}>
             <div>
-              <div className={styles.caixaLogoSlot} aria-label="Espaço reservado para logo da CAIXA">LOGO CAIXA</div>
+              <div className={styles.caixaLogoSlot}>
+                <img src="/logo-caixa.png" alt="CAIXA" />
+              </div>
               <span className={styles.caixaLabel}>CORRESPONDENTE CAIXA</span>
               <h2>Financiamento sem complicação</h2>
               <p>Agilizamos os trâmites do seu financiamento, além de apoiar em compra, venda e regularização de imóveis.</p>

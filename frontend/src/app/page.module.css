@@ -112,6 +112,15 @@
   letter-spacing: 1.5px;
 }
 
+.caixaLogoSlot img {
+  display: block;
+  max-width: 115px;
+  max-height: 42px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .caixaBrand {
   display: inline-flex;
   align-items: baseline;
