@@ -7,7 +7,6 @@ import PropertyCard from '../components/PropertyCard/PropertyCard';
 import api from '../services/api';
 import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight } from 'react-icons/fa';
 import styles from './page.module.css';
-
 export default function Home() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,31 +29,17 @@ export default function Home() {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
+        <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
-          <div className={styles.heroCopy}>
-            <h1 className={styles.visuallyHidden}>Elena Imóveis</h1>
-            <span className={styles.heroEyebrow}>ELENA IMÓVEIS · PORTO ALEGRE</span>
-            <p className={styles.heroSubtitle}>Encontre oportunidades em Porto Alegre com atendimento próximo e orientação em cada etapa.</p>
-            <div className={styles.heroActions}>
-              <Link href="/imoveis" className={styles.heroPrimary}>Explorar imóveis <FaArrowRight /></Link>
-            </div>
-          </div>
-
-          <div className={styles.caixaHighlight}>
-            <div>
-              <div className={styles.caixaLogoSlot}>
-                <img src="/logo-caixa.png" alt="CAIXA" />
-              </div>
-              <span className={styles.caixaLabel}>CORRESPONDENTE CAIXA</span>
-              <h2>Financiamento sem complicação</h2>
-              <p>Agilizamos os trâmites do seu financiamento, além de apoiar em compra, venda e regularização de imóveis.</p>
-            </div>
-          </div>
-
+          <h1 className={styles.heroTitle}>
+            Descubra o Imóvel dos Seus <span className={styles.goldText}>Sonhos</span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            Encontre imóveis para comprar ou alugar em Porto Alegre e região.
+          </p>
           <div className={styles.searchWrapper}>
             <SearchBar />
           </div>
-
         </div>
       </section>
 
