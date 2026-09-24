@@ -96,9 +96,7 @@ export default function NovoImovelPage() {
       const formData = new FormData();
       imageFiles.forEach((file) => formData.append('images', file));
       try {
-        await api.post(`/upload/${propertyId}`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        await api.post(`/upload/${propertyId}`, formData);
       } catch (uploadError) {
         await api.delete(`/properties/${propertyId}`);
         throw uploadError;

@@ -337,7 +337,7 @@ async function getMyProperties(req, res) {
     const result = await query(`
       SELECT p.*,
         (SELECT image_url FROM property_images pi WHERE pi.property_id = p.id AND pi.is_cover = true LIMIT 1) as cover_url,
-        (SELECT COUNT(*) FROM property_images pi WHERE pi.property_id = p.id) as total_images,
+        (SELECT COUNT(*) FROM property_images pi WHERE pi.property_id = p.id) as total_images
       FROM properties p
       WHERE p.user_id = $1
       ORDER BY p.created_at DESC

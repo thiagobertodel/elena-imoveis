@@ -10,12 +10,13 @@ const propertyController = require('../controllers/property.controller');
 router.get('/', searchValidation, handleValidation, propertyController.listProperties);
 router.get('/featured', propertyController.getFeatured);
 router.get('/cities', propertyController.getCities);
-router.get('/:id', uuidValidation, handleValidation, optionalAuth, propertyController.getProperty);
+router.get('/user/my', authMiddleware, propertyController.getMyProperties);
 
 // Rotas protegidas
-router.get('/user/my', authMiddleware, propertyController.getMyProperties);
 router.post('/', authMiddleware, adminMiddleware, propertyValidation, handleValidation, propertyController.createProperty);
 router.put('/:id', authMiddleware, adminMiddleware, uuidValidation, handleValidation, propertyController.updateProperty);
 router.delete('/:id', authMiddleware, adminMiddleware, uuidValidation, handleValidation, propertyController.deleteProperty);
+
+router.get('/:id', uuidValidation, handleValidation, optionalAuth, propertyController.getProperty);
 
 module.exports = router;
