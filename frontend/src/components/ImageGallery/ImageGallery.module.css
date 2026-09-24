@@ -1,0 +1,183 @@
+.container {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 1rem;
+  height: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.mainWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.mainImage {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.mainWrapper:hover .mainImage {
+  transform: scale(1.02);
+}
+
+.expandBtn {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: rgba(11, 19, 41, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.expandBtn:hover {
+  background: var(--accent-gold);
+  color: #0b1329;
+}
+
+.thumbsGrid {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.thumbWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.activeThumb {
+  border-color: var(--accent-gold);
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.moreOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 19, 41, 0.8);
+  backdrop-filter: blur(4px);
+  color: var(--accent-gold);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lightbox Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10001;
+  transition: color 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: var(--accent-gold);
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all 0.2s ease;
+}
+
+.navBtn:hover {
+  background: var(--accent-gold);
+  color: #0b1329;
+}
+
+.prevBtn {
+  left: 2rem;
+}
+
+.nextBtn {
+  right: 2rem;
+}
+
+.modalImageWrapper {
+  position: relative;
+  width: 80vw;
+  height: 80vh;
+}
+
+.modalImage {
+  object-fit: contain;
+}
+
+.counter {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    height: 300px;
+  }
+  .thumbsGrid {
+    display: none;
+  }
+}
