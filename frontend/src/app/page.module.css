@@ -4,28 +4,36 @@
 
 .hero {
   position: relative;
-  min-height: 760px;
+  min-height: 720px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #102a43;
+  background: #f7fafc;
   padding: 7rem 1.5rem 4rem;
   overflow: hidden;
 }
 
 .heroImage {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 43%;
+  border-left: 1px solid #d9e3ed;
+  border-bottom-left-radius: 120px;
   background-position: center;
   background-size: cover;
   transition: opacity 0.5s ease, transform 8s ease;
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .heroOverlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(7, 21, 37, 0.9) 0%, rgba(7, 21, 37, 0.62) 45%, rgba(7, 21, 37, 0.2) 100%), linear-gradient(0deg, rgba(7, 21, 37, 0.76), transparent 45%);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 43%;
+  background: linear-gradient(90deg, #f7fafc 0%, rgba(247,250,252,0) 18%);
 }
 
 .heroContent {
@@ -53,7 +61,7 @@
   font-weight: 800;
   line-height: 0.98;
   letter-spacing: 0;
-  color: #ffffff;
+  color: #17395f;
   margin: 1.25rem 0;
   max-width: 650px;
 }
@@ -64,7 +72,7 @@
 
 .heroSubtitle {
   font-size: 1.08rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: #60758b;
   max-width: 700px;
   margin: 0 0 1.75rem;
   line-height: 1.6;
@@ -83,7 +91,7 @@
   border-radius: 4px;
 }
 
-.heroCounter { color: rgba(255,255,255,0.72); font-size: 0.85rem; letter-spacing: 1px; }
+.heroCounter { color: #60758b; font-size: 0.85rem; letter-spacing: 1px; }
 
 .caixaHighlight {
   grid-column: 2;
@@ -120,15 +128,15 @@
   height: 34px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(7,21,37,0.35);
-  color: #fff;
+  border: 1px solid #cbd8e5;
+  background: #ffffff;
+  color: #17395f;
   cursor: pointer;
   border-radius: 50%;
 }
 
 .slideDots { display: flex; gap: 0.45rem; }
-.slideDots button { width: 24px; height: 4px; border: 0; border-radius: 0; background: rgba(255,255,255,0.4); }
+.slideDots button { width: 24px; height: 4px; border: 0; border-radius: 0; background: #cbd8e5; }
 .slideDots button.activeDot { width: 48px; background: #d8b75a; }
 
 .section {
@@ -367,7 +375,10 @@
 
 @media (max-width: 992px) {
   .hero { min-height: 820px; }
+  .heroImage { top: 0; right: 0; bottom: auto; width: 100%; height: 280px; border-left: 0; border-bottom-left-radius: 0; }
+  .heroOverlay { top: 0; right: 0; bottom: auto; width: 100%; height: 280px; background: linear-gradient(0deg, #f7fafc 0%, rgba(247,250,252,0) 42%); }
   .heroContent { grid-template-columns: 1fr; align-items: start; }
+  .heroCopy { padding-top: 250px; }
   .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
   .heroTitle { font-size: 3.5rem; }
   .categoriesGrid { grid-template-columns: repeat(2, 1fr); }
@@ -376,6 +387,7 @@
 
 @media (max-width: 576px) {
   .hero { min-height: 920px; padding-top: 6rem; }
+  .heroCopy { padding-top: 190px; }
   .heroTitle { font-size: 3rem; }
   .heroSubtitle { font-size: 1rem; }
   .heroActions { flex-wrap: wrap; }

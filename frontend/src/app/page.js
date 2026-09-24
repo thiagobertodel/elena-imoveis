@@ -12,14 +12,14 @@ const heroSlides = [
   {
     image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=85',
     eyebrow: 'ELENA IMÓVEIS · PORTO ALEGRE',
-    title: 'Escolhas que atravessam gerações',
-    text: 'Uma curadoria imobiliária próxima, segura e feita para o seu próximo capítulo.',
+    title: 'Seu próximo imóvel começa aqui',
+    text: 'Encontre oportunidades em Porto Alegre com atendimento próximo e orientação em cada etapa.',
   },
   {
     image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
     eyebrow: 'COMPRA · VENDA · FINANCIAMENTO',
-    title: 'Seu imóvel com mais clareza',
-    text: 'Do primeiro atendimento à assinatura, cuidamos de cada etapa com experiência local.',
+    title: 'Negócios imobiliários com segurança',
+    text: 'Do financiamento à regularização, conte com uma equipe experiente para seguir em frente.',
   },
 ];
 
