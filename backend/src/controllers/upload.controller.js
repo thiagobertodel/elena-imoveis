@@ -76,7 +76,7 @@ async function uploadImages(req, res) {
     });
   } catch (err) {
     console.error('Erro no upload:', err);
-    return res.status(500).json({ error: 'Erro ao fazer upload das imagens' });
+    return res.status(502).json({ error: 'Não foi possível enviar as imagens ao Cloudinary' });
   }
 }
 
