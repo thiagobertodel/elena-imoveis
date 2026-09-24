@@ -5,36 +5,12 @@ import Link from 'next/link';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
 import api from '../services/api';
-import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight } from 'react-icons/fa';
 import styles from './page.module.css';
-
-const heroSlides = [
-  {
-    image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1400&q=85',
-    eyebrow: 'ELENA IMÓVEIS · PORTO ALEGRE',
-    title: 'Seu próximo imóvel começa aqui',
-    text: 'Encontre oportunidades em Porto Alegre com atendimento próximo e orientação em cada etapa.',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85',
-    eyebrow: 'COMPRA · VENDA · FINANCIAMENTO',
-    title: 'Negócios imobiliários com segurança',
-    text: 'Do financiamento à regularização, conte com uma equipe experiente para seguir em frente.',
-  },
-];
 
 export default function Home() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
-  const [activeSlide, setActiveSlide] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
-    }, 7000);
-
-    return () => window.clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     async function loadProperties() {
@@ -57,11 +33,10 @@ export default function Home() {
         <div className={styles.heroContent}>
           <div className={styles.heroCopy}>
             <h1 className={styles.visuallyHidden}>Elena Imóveis</h1>
-            <span className={styles.heroEyebrow}>{heroSlides[activeSlide].eyebrow}</span>
-            <p className={styles.heroSubtitle}>{heroSlides[activeSlide].text}</p>
+            <span className={styles.heroEyebrow}>ELENA IMÓVEIS · PORTO ALEGRE</span>
+            <p className={styles.heroSubtitle}>Encontre oportunidades em Porto Alegre com atendimento próximo e orientação em cada etapa.</p>
             <div className={styles.heroActions}>
               <Link href="/imoveis" className={styles.heroPrimary}>Explorar imóveis <FaArrowRight /></Link>
-              <span className={styles.heroCounter}>{String(activeSlide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span>
             </div>
           </div>
 
@@ -78,15 +53,7 @@ export default function Home() {
             <SearchBar />
           </div>
 
-          <div className={styles.slideControls}>
-            <button type="button" onClick={() => setActiveSlide((activeSlide - 1 + heroSlides.length) % heroSlides.length)} aria-label="Slide anterior"><FaChevronLeft /></button>
-            <div className={styles.slideDots}>
-              {heroSlides.map((slide, index) => <button key={slide.title} type="button" className={index === activeSlide ? styles.activeDot : ''} onClick={() => setActiveSlide(index)} aria-label={`Ir para slide ${index + 1}`} />)}
-            </div>
-            <button type="button" onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Próximo slide"><FaChevronRight /></button>
-          </div>
         </div>
-        <div className={styles.heroImage} style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }} aria-hidden="true" />
       </section>
 
       {/* Featured Properties Section */}

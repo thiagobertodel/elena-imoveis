@@ -4,28 +4,14 @@
 
 .hero {
   position: relative;
-  min-height: 720px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  padding: 7rem 1.5rem 0;
+  padding: 7rem 1.5rem 4rem;
   overflow: hidden;
-}
-
-.heroImage {
-  position: relative;
-  top: auto;
-  right: auto;
-  bottom: auto;
-  width: 100%;
-  height: 300px;
-  flex-shrink: 0;
-  background-position: center;
-  background-size: cover;
-  border-radius: 0;
-  box-shadow: none;
 }
 
 .heroContent {
@@ -37,7 +23,7 @@
   grid-template-columns: minmax(0, 1fr) 390px;
   gap: 2rem;
   align-items: start;
-  padding: 1.5rem 0 2rem;
+  padding: 1.5rem 0 0;
 }
 
 .heroCopy { max-width: 680px; }
@@ -109,7 +95,6 @@
   border-left: 4px solid #d8b75a;
   box-shadow: 0 18px 45px rgba(0,0,0,0.24);
   color: #102a43;
-  z-index: 2;
 }
 
 .caixaLogoSlot {
@@ -152,31 +137,6 @@
   margin-top: 1rem;
   z-index: 2;
 }
-
-.slideControls {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: -0.5rem;
-  z-index: 2;
-}
-
-.slideControls button {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #cbd8e5;
-  background: #ffffff;
-  color: #17395f;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.slideDots { display: flex; gap: 0.45rem; }
-.slideDots button { width: 24px; height: 4px; border: 0; border-radius: 0; background: #cbd8e5; }
-.slideDots button.activeDot { width: 48px; background: #d8b75a; }
 
 .section {
   max-width: 1280px;
@@ -413,8 +373,7 @@
 }
 
 @media (max-width: 992px) {
-  .hero { min-height: 820px; }
-  .heroImage { height: 260px; opacity: 0.92; }
+  .hero { min-height: 700px; }
   .heroContent { grid-template-columns: 1fr; align-items: start; }
   .heroCopy { padding-bottom: 1rem; }
   .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
