@@ -54,7 +54,6 @@ export default function Home() {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroImage} style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }} aria-hidden="true" />
         <div className={styles.heroContent}>
           <div className={styles.heroCopy}>
             <h1 className={styles.visuallyHidden}>Elena Imóveis</h1>
@@ -87,6 +86,7 @@ export default function Home() {
             <button type="button" onClick={() => setActiveSlide((activeSlide + 1) % heroSlides.length)} aria-label="Próximo slide"><FaChevronRight /></button>
           </div>
         </div>
+        <div className={styles.heroImage} style={{ backgroundImage: `url(${heroSlides[activeSlide].image})` }} aria-hidden="true" />
       </section>
 
       {/* Featured Properties Section */}
