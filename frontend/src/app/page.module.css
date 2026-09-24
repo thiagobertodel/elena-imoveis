@@ -4,29 +4,29 @@
 
 .hero {
   position: relative;
-  min-height: 520px;
+  min-height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  padding: 7rem 1.5rem 4rem;
+  padding: 6.5rem 1.5rem 3.5rem;
   overflow: hidden;
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
-  max-width: 1240px;
+  max-width: 1160px;
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 390px;
-  gap: 2rem;
+  gap: 4rem;
   align-items: start;
-  padding: 1.5rem 0 0;
+  padding: 1rem 0 0;
 }
 
-.heroCopy { max-width: 680px; }
+.heroCopy { max-width: 600px; padding-top: 0.9rem; }
 
 .visuallyHidden {
   position: absolute;
@@ -62,10 +62,10 @@
 }
 
 .heroSubtitle {
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   color: #60758b;
   max-width: 700px;
-  margin: 0 0 1.75rem;
+  margin: 1rem 0 1.5rem;
   line-height: 1.6;
 }
 
@@ -86,23 +86,24 @@
 
 .caixaHighlight {
   grid-column: 2;
-  grid-row: 1 / span 2;
+  grid-row: 1;
   align-self: center;
   display: flex;
   gap: 1rem;
-  padding: 1.5rem;
-  background: #ffffff;
-  border-left: 4px solid #d8b75a;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.24);
+  padding: 1.35rem 1.5rem 1.5rem;
+  background: #f8fbfd;
+  border: 1px solid #dce6ef;
+  border-top: 4px solid #d8b75a;
+  box-shadow: 0 10px 24px rgba(25, 54, 82, 0.08);
   color: #102a43;
 }
 
 .caixaLogoSlot {
-  width: 170px;
+  width: 150px;
   height: 58px;
   display: grid;
   place-items: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   border: 1px dashed #9eb4c9;
   background: #f7fafc;
   color: #6c8298;
@@ -134,7 +135,7 @@
 
 .searchWrapper {
   grid-column: 1 / -1;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   z-index: 2;
 }
 
@@ -373,7 +374,7 @@
 }
 
 @media (max-width: 992px) {
-  .hero { min-height: 700px; }
+  .hero { min-height: 620px; }
   .heroContent { grid-template-columns: 1fr; align-items: start; }
   .heroCopy { padding-bottom: 1rem; }
   .caixaHighlight { grid-column: 1; grid-row: auto; max-width: 520px; }
@@ -383,7 +384,7 @@
 }
 
 @media (max-width: 576px) {
-  .hero { min-height: 920px; padding-top: 6rem; }
+  .hero { min-height: 700px; padding-top: 5.5rem; }
   .heroTitle { font-size: 3rem; }
   .heroSubtitle { font-size: 1rem; }
   .heroActions { flex-wrap: wrap; }
