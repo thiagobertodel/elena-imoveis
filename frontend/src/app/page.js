@@ -54,8 +54,8 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroCopy}>
+            <h1 className={styles.visuallyHidden}>Elena Imóveis</h1>
             <span className={styles.heroEyebrow}>{heroSlides[activeSlide].eyebrow}</span>
-            <h1 className={styles.heroTitle}>{heroSlides[activeSlide].title}</h1>
             <p className={styles.heroSubtitle}>{heroSlides[activeSlide].text}</p>
             <div className={styles.heroActions}>
               <Link href="/imoveis" className={styles.heroPrimary}>Explorar imóveis <FaArrowRight /></Link>
