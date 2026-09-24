@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
 import api from '../services/api';
-import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight, FaChevronLeft, FaChevronRight, FaUniversity } from 'react-icons/fa';
+import { FaShieldAlt, FaKey, FaHandshake, FaGem, FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from './page.module.css';
 
 const heroSlides = [
@@ -68,8 +68,10 @@ export default function Home() {
           </div>
 
           <div className={styles.caixaHighlight}>
-            <div className={styles.caixaIcon}><FaUniversity /></div>
             <div>
+              <div className={styles.caixaBrand} aria-label="CAIXA">
+                <span>CAI</span><b>X</b><span>A</span>
+              </div>
               <span className={styles.caixaLabel}>CORRESPONDENTE CAIXA</span>
               <h2>Financiamento sem complicação</h2>
               <p>Agilizamos os trâmites do seu financiamento, além de apoiar em compra, venda e regularização de imóveis.</p>

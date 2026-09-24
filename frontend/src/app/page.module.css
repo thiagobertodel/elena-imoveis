@@ -106,7 +106,24 @@
   color: #102a43;
 }
 
-.caixaIcon { color: #1769c2; font-size: 1.5rem; }
+.caixaBrand {
+  display: inline-flex;
+  align-items: baseline;
+  color: #1769c2;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0.55rem;
+}
+
+.caixaBrand b {
+  color: #f28c28;
+  font-size: 2.25rem;
+  font-style: italic;
+  margin: 0 0.02rem;
+}
+
 .caixaHighlight h2 { font-size: 1.35rem; line-height: 1.1; margin: 0.35rem 0 0.6rem; }
 .caixaHighlight p { color: #5b7087; font-size: 0.9rem; line-height: 1.55; margin: 0; }
 
