@@ -47,11 +47,15 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Contato & Suporte</h4>
             <div className={styles.contactItem} style={{ alignItems: 'flex-start' }}>
               <FaMapMarkerAlt style={{ marginTop: '5px' }} />
-              <span>Travessa Américo Silveira, 165-E, Bairro Cristo Redentor<br />Porto Alegre - RS | CEP 91370-010</span>
+              <span>Travessa Américo Silveira, 165-E<br />Bairro Cristo Redentor<br />CEP 91370-010 - Porto Alegre - RS</span>
             </div>
             <div className={styles.contactItem}>
               <FaPhoneAlt />
-              <span>51 3347-4228 / 51 99961-2190</span>
+              <span>51 3347-4228 / 51 3024-4128</span>
+            </div>
+            <div className={styles.contactItem}>
+              <FaPhoneAlt />
+              <span>Celular/WhatsApp: 51 99961-2190</span>
             </div>
             <div className={styles.contactItem}>
               <FaEnvelope />
