@@ -4,13 +4,13 @@
 
 .hero {
   position: relative;
-  min-height: 450px;
+  min-height: 390px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  padding: 6.5rem 1.5rem 3.5rem;
+  padding: 6.5rem 1.5rem 2.5rem;
   overflow: hidden;
 }
 
@@ -20,13 +20,13 @@
   max-width: 1160px;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
-  gap: 4rem;
-  align-items: start;
-  padding: 1rem 0 0;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 0;
 }
 
-.heroCopy { max-width: 600px; padding-top: 0.9rem; }
+.heroCopy { max-width: 560px; }
 
 .visuallyHidden {
   position: absolute;
@@ -62,10 +62,10 @@
 }
 
 .heroSubtitle {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: #60758b;
   max-width: 700px;
-  margin: 1rem 0 1.5rem;
+  margin: 0.75rem 0 1.25rem;
   line-height: 1.6;
 }
 
@@ -87,23 +87,23 @@
 .caixaHighlight {
   grid-column: 2;
   grid-row: 1;
-  align-self: center;
+  align-self: stretch;
   display: flex;
   gap: 1rem;
-  padding: 1.35rem 1.5rem 1.5rem;
-  background: #f8fbfd;
-  border: 1px solid #dce6ef;
-  border-top: 4px solid #d8b75a;
-  box-shadow: 0 10px 24px rgba(25, 54, 82, 0.08);
+  padding: 1.25rem 1.5rem;
+  background: #f4f7fb;
+  border: 0;
+  border-left: 4px solid #d8b75a;
+  box-shadow: none;
   color: #102a43;
 }
 
 .caixaLogoSlot {
-  width: 150px;
-  height: 58px;
+  width: 135px;
+  height: 48px;
   display: grid;
   place-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
   border: 1px dashed #9eb4c9;
   background: #f7fafc;
   color: #6c8298;
@@ -130,8 +130,8 @@
   margin: 0 0.02rem;
 }
 
-.caixaHighlight h2 { font-size: 1.35rem; line-height: 1.1; margin: 0.35rem 0 0.6rem; }
-.caixaHighlight p { color: #5b7087; font-size: 0.9rem; line-height: 1.55; margin: 0; }
+.caixaHighlight h2 { font-size: 1.2rem; line-height: 1.15; margin: 0.3rem 0 0.45rem; }
+.caixaHighlight p { color: #5b7087; font-size: 0.85rem; line-height: 1.45; margin: 0; }
 
 .searchWrapper {
   grid-column: 1 / -1;
