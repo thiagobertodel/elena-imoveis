@@ -99,23 +99,19 @@
 }
 
 .caixaLogoSlot {
-  width: 135px;
-  height: 48px;
+  width: 220px;
+  height: 82px;
   display: grid;
   place-items: center;
   margin-bottom: 0.7rem;
-  border: 1px dashed #9eb4c9;
-  background: #f7fafc;
-  color: #6c8298;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  border: 0;
+  background: transparent;
 }
 
 .caixaLogoSlot img {
   display: block;
-  max-width: 115px;
-  max-height: 42px;
+  max-width: 190px;
+  max-height: 70px;
   width: auto;
   height: auto;
   object-fit: contain;
