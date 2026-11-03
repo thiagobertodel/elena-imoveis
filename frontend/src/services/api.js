@@ -98,4 +98,17 @@ export const adminAPI = {
   listUsers: () => api.get('/admin/users'),
 };
 
+// =============================================
+// INTEGRAÇÕES (ZAP / VIVA REAL - VRSYNC)
+// =============================================
+
+export const integrationsAPI = {
+  getDashboard: () => api.get('/integrations/admin'),
+  sync: () => api.post('/integrations/admin/sync'),
+  toggleProperty: (propertyId) => api.put(`/integrations/admin/property/${propertyId}/toggle`),
+  updateSettings: (data) => api.put('/integrations/admin/settings', data),
+  getLogs: () => api.get('/integrations/admin/logs'),
+};
+
 export default api;
+

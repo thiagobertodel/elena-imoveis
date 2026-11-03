@@ -7,7 +7,7 @@ import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute';
 import StatsCard from '../../components/StatsCard/StatsCard';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
-import { FaUserShield, FaBuilding, FaCheck, FaTimes, FaUsers, FaClock, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaUserShield, FaBuilding, FaCheck, FaTimes, FaUsers, FaClock, FaExternalLinkAlt, FaRss } from 'react-icons/fa';
 import styles from './admin.module.css';
 
 export default function AdminDashboard() {
@@ -71,7 +71,11 @@ export default function AdminDashboard() {
               <FaUserShield className={styles.adminIcon} /> Controle Geral Elena Imóveis
             </h1>
           </div>
+          <Link href="/admin/integracoes" className={styles.integrationsBtn}>
+            <FaRss /> Integrações com Portais (ZAP / Viva Real)
+          </Link>
         </div>
+
 
         {/* Global Platform Metrics */}
         <div className={styles.statsGrid}>

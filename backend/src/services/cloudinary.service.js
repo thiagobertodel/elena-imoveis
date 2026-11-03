@@ -16,22 +16,28 @@ cloudinary.config({
 });
 
 /**
- * Faz upload de uma imagem para o Cloudinary.
+ * Faz upload de mídia (imagem ou vídeo) para o Cloudinary.
  * @param {Buffer} fileBuffer - Buffer do arquivo
  * @param {string} folder - Pasta no Cloudinary
- * @returns {Promise<{url: string, publicId: string}>}
+ * @param {string} resourceType - 'image' | 'video' | 'auto'
+ * @returns {Promise<{url: string, publicId: string, resourceType: string}>}
  */
-async function uploadImage(fileBuffer, folder = 'elena-imoveis/properties') {
+async function uploadMedia(fileBuffer, folder = 'elena-imoveis/properties', resourceType = 'image') {
   return new Promise((resolve, reject) => {
+    const options = {
+      folder,
+      resource_type: resourceType,
+    };
+
+    if (resourceType === 'image') {
+      options.transformation = [
+        { width: 1920, height: 1080, crop: 'limit' },
+        { quality: 'auto', fetch_format: 'auto' },
+      ];
+    }
+
     const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder,
-        resource_type: 'image',
-        transformation: [
-          { width: 1200, height: 800, crop: 'limit' },
-          { quality: 'auto', fetch_format: 'auto' },
-        ],
-      },
+      options,
       (error, result) => {
         if (error) {
           reject(error);
@@ -39,6 +45,7 @@ async function uploadImage(fileBuffer, folder = 'elena-imoveis/properties') {
           resolve({
             url: result.secure_url,
             publicId: result.public_id,
+            resourceType: result.resource_type,
           });
         }
       }
@@ -49,12 +56,28 @@ async function uploadImage(fileBuffer, folder = 'elena-imoveis/properties') {
 }
 
 /**
- * Remove uma imagem do Cloudinary.
- * @param {string} publicId - Public ID da imagem
- * @returns {Promise}
+ * Faz upload de uma imagem para o Cloudinary (atalho mantido para compatibilidade).
  */
-async function deleteImage(publicId) {
-  return cloudinary.uploader.destroy(publicId);
+async function uploadImage(fileBuffer, folder = 'elena-imoveis/properties') {
+  return uploadMedia(fileBuffer, folder, 'image');
 }
 
-module.exports = { uploadImage, deleteImage, cloudinary, isConfigured };
+/**
+ * Remove mídia do Cloudinary.
+ * @param {string} publicId - Public ID da mídia
+ * @param {string} resourceType - 'image' | 'video'
+ * @returns {Promise}
+ */
+async function deleteMedia(publicId, resourceType = 'image') {
+  return cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+}
+
+/**
+ * Remove uma imagem do Cloudinary (atalho mantido para compatibilidade).
+ */
+async function deleteImage(publicId) {
+  return deleteMedia(publicId, 'image');
+}
+
+module.exports = { uploadMedia, uploadImage, deleteMedia, deleteImage, cloudinary, isConfigured };
+

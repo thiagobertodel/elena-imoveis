@@ -1,4 +1,12 @@
 {
+  "name": "elena-imoveis",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build"
+  },
   "dependencies": {
     "cloudinary": "^2.11.0"
   }

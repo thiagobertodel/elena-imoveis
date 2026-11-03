@@ -6,8 +6,10 @@ import ProtectedRoute from '../../../components/ProtectedRoute/ProtectedRoute';
 import ImageUploader from '../../../components/ImageUploader/ImageUploader';
 import api from '../../../services/api';
 import toast from 'react-hot-toast';
-import { FaBuilding, FaMapMarkerAlt, FaClipboardList, FaImages, FaCheckCircle, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaBuilding, FaMapMarkerAlt, FaClipboardList, FaImages, FaCheckCircle, FaArrowLeft, FaArrowRight, FaSearch, FaSpinner } from 'react-icons/fa';
 import styles from './novoImovel.module.css';
+
+
 
 const COMMON_FEATURES = [
   'Piscina', 'Churrasqueira', 'Espaço Gourmet', 'Academia', 'Sauna',
@@ -44,6 +46,9 @@ export default function NovoImovelPage() {
 
   const [imagens, setImagens] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [uploadProgress, setUploadProgress] = useState(null);
 
   const toggleFeature = (feat) => {
     setCaracteristicas((prev) =>
@@ -72,6 +77,8 @@ export default function NovoImovelPage() {
     }
 
     setLoading(true);
+    setUploadProgress(0);
+
     try {
       const payload = {
         titulo,
@@ -89,26 +96,56 @@ export default function NovoImovelPage() {
         quartos: Number(quartos),
         banheiros: Number(banheiros),
         garagem: Number(vagas),
+        ...(videoUrl.trim() ? { video_url: videoUrl.trim() } : {}),
       };
 
       const propertyResponse = await api.post('/properties', payload);
       const propertyId = propertyResponse.data.property.id;
-      const formData = new FormData();
-      imageFiles.forEach((file) => formData.append('images', file));
-      try {
-        await api.post(`/upload/${propertyId}`, formData);
-      } catch (uploadError) {
-        await api.delete(`/properties/${propertyId}`);
-        throw uploadError;
+
+      // Montar lista completa de mídias (fotos + arquivo de vídeo opcional)
+      const allFiles = [...imageFiles];
+      if (videoFile) {
+        allFiles.push(videoFile);
       }
+
+      // Envio em lotes (8 por vez) para suportar até 60 fotos com segurança e sem timeout
+      if (allFiles.length > 0) {
+        const BATCH_SIZE = 8;
+        const totalFiles = allFiles.length;
+        let uploadedCount = 0;
+
+        for (let i = 0; i < totalFiles; i += BATCH_SIZE) {
+          const batch = allFiles.slice(i, i + BATCH_SIZE);
+          const formData = new FormData();
+          batch.forEach((file) => formData.append('images', file));
+
+          const currentPct = Math.round((uploadedCount / totalFiles) * 100);
+          setUploadProgress(currentPct);
+
+          toast.loading(
+            `Enviando mídias: ${uploadedCount} de ${totalFiles} (${currentPct}%)...`,
+            { id: 'media-upload' }
+          );
+
+          await api.post(`/upload/${propertyId}`, formData);
+
+          uploadedCount += batch.length;
+          setUploadProgress(Math.round((uploadedCount / totalFiles) * 100));
+        }
+
+        toast.success('Todas as mídias foram enviadas com sucesso!', { id: 'media-upload' });
+      }
+
       toast.success('Imóvel cadastrado e publicado com sucesso!');
       router.push('/painel');
     } catch (err) {
       toast.error(err.response?.data?.error || err.response?.data?.mensagem || 'Erro ao cadastrar imóvel');
     } finally {
       setLoading(false);
+      setUploadProgress(null);
     }
   };
+
 
   return (
     <ProtectedRoute allowedRoles={['admin']}>
@@ -389,9 +426,9 @@ export default function NovoImovelPage() {
           {/* Step 4 Form */}
           {step === 4 && (
             <form onSubmit={handleSubmit} className={styles.form}>
-              <h3 className={styles.stepTitle}><FaImages /> Etapa 4: Fotos do Imóvel</h3>
+              <h3 className={styles.stepTitle}><FaImages /> Etapa 4: Fotos e Vídeo do Imóvel</h3>
               <p className={styles.stepSubtitle}>
-                Faça o upload de fotos de alta resolução para encantar os futuros compradores. A primeira foto será a capa do anúncio.
+                Envie até <strong>60 fotos de alta resolução</strong> e adicione um vídeo promocional ou tour virtual para valorizar o imóvel.
               </p>
 
               <ImageUploader
@@ -399,6 +436,11 @@ export default function NovoImovelPage() {
                 setImages={setImagens}
                 files={imageFiles}
                 setFiles={setImageFiles}
+                videoFile={videoFile}
+                setVideoFile={setVideoFile}
+                videoUrl={videoUrl}
+                setVideoUrl={setVideoUrl}
+                uploadProgress={uploadProgress}
               />
 
               <div className={styles.btnRow}>
@@ -406,11 +448,14 @@ export default function NovoImovelPage() {
                   <FaArrowLeft /> Voltar
                 </button>
                 <button type="submit" className={styles.submitBtn} disabled={loading}>
-                  {loading ? 'Publicando...' : 'Finalizar e Cadastrar Imóvel'}
+                  {loading 
+                    ? (uploadProgress !== null ? `Enviando mídias (${uploadProgress}%)...` : 'Publicando imóvel...') 
+                    : 'Finalizar e Cadastrar Imóvel'}
                 </button>
               </div>
             </form>
           )}
+
         </div>
       </div>
     </ProtectedRoute>

@@ -42,7 +42,9 @@ const propertyValidation = [
   body('cep').optional().trim(),
   body('latitude').optional().isDecimal().withMessage('Latitude inválida'),
   body('longitude').optional().isDecimal().withMessage('Longitude inválida'),
+  body('video_url').optional({ nullable: true }).trim(),
 ];
+
 
 const searchValidation = [
   query('cidade').optional().trim(),

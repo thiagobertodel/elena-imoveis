@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { FaExpand, FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
+import { FaExpand, FaChevronLeft, FaChevronRight, FaTimes, FaPlay, FaVideo } from 'react-icons/fa';
 import styles from './ImageGallery.module.css';
 
-export default function ImageGallery({ images = [], title = '' }) {
+export default function ImageGallery({ images = [], title = '', videoUrl = null }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -32,10 +32,30 @@ export default function ImageGallery({ images = [], title = '' }) {
             className={styles.mainImage}
             priority
           />
-          <button className={styles.expandBtn} aria-label="Expandir foto">
-            <FaExpand /> Ver Fotos ({galleryImages.length})
-          </button>
+
+          <div className={styles.mainActions}>
+            {videoUrl && (
+              <button
+                type="button"
+                className={styles.videoBadgeBtn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const target = document.getElementById('video-tour');
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <FaPlay className={styles.playIcon} /> Assistir ao Vídeo
+              </button>
+            )}
+
+            <button className={styles.expandBtn} aria-label="Expandir foto">
+              <FaExpand /> Ver Fotos ({galleryImages.length})
+            </button>
+          </div>
         </div>
+
 
         <div className={styles.thumbsGrid}>
           {galleryImages.slice(0, 4).map((imgUrl, idx) => (

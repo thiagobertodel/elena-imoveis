@@ -218,7 +218,7 @@ async function createProperty(req, res) {
       titulo, descricao, preco, tipo, categoria,
       area, quartos, banheiros, garagem,
       cidade, bairro, endereco, cep,
-      latitude, longitude,
+      latitude, longitude, video_url,
     } = req.body;
 
     const result = await query(`
@@ -226,14 +226,14 @@ async function createProperty(req, res) {
         user_id, titulo, descricao, preco, tipo, categoria,
         area, quartos, banheiros, garagem,
         cidade, bairro, endereco, cep,
-        latitude, longitude, status
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'ativo')
+        latitude, longitude, status, video_url
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'ativo',$17)
       RETURNING *
     `, [
       req.userId, titulo, descricao, preco, tipo, categoria,
       area || null, quartos || 0, banheiros || 0, garagem || 0,
       cidade, bairro || null, endereco || null, cep || null,
-      latitude || null, longitude || null,
+      latitude || null, longitude || null, video_url || null,
     ]);
 
     return res.status(201).json({
@@ -267,7 +267,7 @@ async function updateProperty(req, res) {
       titulo, descricao, preco, tipo, categoria,
       area, quartos, banheiros, garagem,
       cidade, bairro, endereco, cep,
-      latitude, longitude,
+      latitude, longitude, video_url,
     } = req.body;
 
     const result = await query(`
@@ -287,14 +287,15 @@ async function updateProperty(req, res) {
         cep = COALESCE($13, cep),
         latitude = COALESCE($14, latitude),
         longitude = COALESCE($15, longitude),
+        video_url = COALESCE($16, video_url),
         updated_at = NOW()
-      WHERE id = $16
+      WHERE id = $17
       RETURNING *
     `, [
       titulo, descricao, preco, tipo, categoria,
       area, quartos, banheiros, garagem,
       cidade, bairro, endereco, cep,
-      latitude, longitude, id,
+      latitude, longitude, video_url, id,
     ]);
 
     return res.json({ property: result.rows[0] });
@@ -303,6 +304,7 @@ async function updateProperty(req, res) {
     return res.status(500).json({ error: 'Erro interno do servidor' });
   }
 }
+
 
 /**
  * DELETE /api/v1/properties/:id

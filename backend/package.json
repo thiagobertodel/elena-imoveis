@@ -7,8 +7,10 @@
     "start": "node src/app.js",
     "dev": "node --watch src/app.js",
     "migrate": "node src/database/migrate.js",
-    "seed": "node src/database/seeds/seed.js"
+    "seed": "node src/database/seeds/seed.js",
+    "test:vrsync": "node src/tests/vrsync.test.js"
   },
+
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.6.0",

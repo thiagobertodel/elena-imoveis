@@ -8,7 +8,8 @@ import api from '../../../services/api';
 import toast from 'react-hot-toast';
 import { 
   FaBed, FaBath, FaCar, FaRulerCombined, 
-  FaMapMarkerAlt, FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCheckCircle, FaShareAlt 
+  FaMapMarkerAlt, FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCheckCircle, FaShareAlt,
+  FaVideo
 } from 'react-icons/fa';
 import styles from './imovel.module.css';
 
@@ -25,10 +26,19 @@ export default function ImovelDetalhes({ params }) {
       try {
         const res = await api.get(`/properties/${id}`);
         const p = res.data.property || res.data;
-        // Transform images format if returned as property_images array
+        // Transform images format if returned as property_images array, separando fotos de vídeo
         if (p.images && (!p.imagens || p.imagens.length === 0)) {
-          p.imagens = p.images.map((img) => img.image_url);
+          p.imagens = p.images
+            .filter((img) => img.media_type !== 'video')
+            .map((img) => img.image_url);
         }
+
+        // Se tiver arquivo de vídeo registrado nas imagens e video_url estiver vazio
+        const videoFromImages = p.images?.find((img) => img.media_type === 'video');
+        if (videoFromImages && !p.video_url) {
+          p.video_url = videoFromImages.image_url;
+        }
+
         setProperty(p);
       } catch (err) {
         toast.error('Erro ao carregar detalhes do imóvel.');
@@ -38,6 +48,7 @@ export default function ImovelDetalhes({ params }) {
     }
     loadProperty();
   }, [id]);
+
 
   const handleShare = () => {
     if (navigator.share) {
@@ -141,7 +152,7 @@ export default function ImovelDetalhes({ params }) {
       </div>
 
       {/* Image Gallery */}
-      <ImageGallery images={property.imagens} title={property.titulo} />
+      <ImageGallery images={property.imagens} title={property.titulo} videoUrl={property.video_url} />
 
       {/* Content Layout: Details Left, Advertiser Sidebar Right */}
       <div className={styles.contentLayout}>
@@ -207,6 +218,40 @@ export default function ImovelDetalhes({ params }) {
             </div>
           )}
 
+          {/* Video Section (se cadastrado) */}
+          {property.video_url && (
+            <div id="video-tour" className={styles.videoSection}>
+              <h3 className={styles.sectionTitle}>
+                <FaVideo className={styles.videoSectionIcon} /> Tour em Vídeo pelo Imóvel
+              </h3>
+              <div className={styles.videoFrameBox}>
+                {(() => {
+                  const match = property.video_url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+                  if (match) {
+                    return (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${match[1]}`}
+                        title={`Tour em Vídeo - ${property.titulo}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className={styles.videoIframe}
+                      />
+                    );
+                  }
+                  return (
+                    <video
+                      src={property.video_url}
+                      controls
+                      playsInline
+                      className={styles.directVideo}
+                    />
+                  );
+                })()}
+              </div>
+            </div>
+          )}
+
           {/* Description */}
           <div className={styles.descriptionSection}>
             <h3 className={styles.sectionTitle}>Sobre o Imóvel</h3>
@@ -238,6 +283,7 @@ export default function ImovelDetalhes({ params }) {
             estado={property.estado}
           />
         </div>
+
 
         {/* Sidebar Advertiser & Contact */}
         <aside className={styles.sidebar}>

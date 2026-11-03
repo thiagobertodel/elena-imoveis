@@ -28,10 +28,43 @@
   transform: scale(1.02);
 }
 
-.expandBtn {
+.mainActions {
   position: absolute;
   bottom: 1.25rem;
   right: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  z-index: 10;
+}
+
+.videoBadgeBtn {
+  background: rgba(220, 38, 38, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+
+.videoBadgeBtn:hover {
+  background: #ef4444;
+  transform: translateY(-2px);
+}
+
+.playIcon {
+  font-size: 0.8rem;
+}
+
+.expandBtn {
   background: rgba(11, 19, 41, 0.85);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border-color);
@@ -51,6 +84,7 @@
   background: var(--accent-gold);
   color: #0b1329;
 }
+
 
 .thumbsGrid {
   display: grid;

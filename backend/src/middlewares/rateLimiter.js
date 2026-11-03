@@ -24,14 +24,15 @@ const authLimiter = rateLimit({
 });
 
 /**
- * Rate limiter para uploads — 20 uploads a cada 15 minutos.
+ * Rate limiter para uploads — 500 requisições a cada 15 minutos (permite uploads em lote de 60+ fotos).
  */
 const uploadLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 20,
+  max: 500,
   message: { error: 'Limite de uploads atingido. Tente novamente em alguns minutos.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
+
 
 module.exports = { generalLimiter, authLimiter, uploadLimiter };

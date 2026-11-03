@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
-import { HiOutlineMenu, HiOutlineX, HiOutlineLogout, HiOutlineCog, HiOutlinePlus } from 'react-icons/hi';
+import { HiOutlineMenu, HiOutlineX, HiOutlineLogout, HiOutlineCog, HiOutlinePlus, HiOutlineGlobeAlt } from 'react-icons/hi';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -82,10 +82,16 @@ export default function Navbar() {
                       <HiOutlinePlus /> Novo Imóvel
                     </Link>
                     {isAdmin && (
-                      <Link href="/admin" className={styles.dropdownItem}>
-                        <HiOutlineCog /> Administração
-                      </Link>
+                      <>
+                        <Link href="/admin" className={styles.dropdownItem}>
+                          <HiOutlineCog /> Administração
+                        </Link>
+                        <Link href="/admin/integracoes" className={styles.dropdownItem}>
+                          <HiOutlineGlobeAlt /> Integrações Portais
+                        </Link>
+                      </>
                     )}
+
                     <div className={styles.dropdownDivider} />
                     <button onClick={logout} className={styles.dropdownItem}>
                       <HiOutlineLogout /> Sair
